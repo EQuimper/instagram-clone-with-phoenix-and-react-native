@@ -1,12 +1,13 @@
-import { Navigation } from 'react-native-navigation'
+import { Navigation } from 'react-native-navigation';
 
-import { registerScreens } from './screens'
+import { registerScreens } from './screens';
+import { iconsLoaded, iconsMap } from './utils/themes';
 
-registerScreens()
+registerScreens();
 
 export default class Nav {
   constructor() {
-    this._initApp()
+    iconsLoaded.then(() => this._initApp());
   }
 
   _initApp() {
@@ -15,14 +16,16 @@ export default class Nav {
         {
           label: 'Feeds',
           screen: 'instagramclone.FeedsScreen',
-          title: 'Instagram'
+          title: 'Instagram',
+          icon: iconsMap.home
         },
         {
           label: 'Explore',
           screen: 'instagramclone.ExploreScreen',
-          title: 'Explore'
+          title: 'Explore',
+          icon: iconsMap['ios-search']
         },
-      ]
-    })
+      ],
+    });
   }
 }
