@@ -7,14 +7,18 @@
     "test": "jest"
   },
   "dependencies": {
+    "@appandflow/touchable": "^1.2.2",
     "react": "16.2.0",
     "react-native": "0.52.0",
     "react-native-navigation": "https://github.com/EQuimper/react-native-navigation",
+    "react-native-typography": "^1.2.1",
     "react-native-vector-icons": "^4.5.0"
   },
   "devDependencies": {
     "babel-jest": "22.1.0",
     "babel-preset-react-native": "4.0.0",
+    "eslint": "^4.15.0",
+    "eslint-config-equimper": "^2.2.1",
     "jest": "22.1.2",
     "react-test-renderer": "16.2.0"
   },
