@@ -1,3 +1,3 @@
-import PhotoCard from './PhotoCard'
+import PhotoCard from './PhotoCard';
 
-export { PhotoCard }
+export { PhotoCard };

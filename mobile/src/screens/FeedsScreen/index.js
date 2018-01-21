@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { ScrollView, Text } from 'react-native';
 
-import { PhotoCard } from '../../components'
+import { PhotoCard } from '../../components';
 
 class FeedsScreen extends Component {
-  state = {  }
+  state = {};
   render() {
     return (
-      <ScrollView>
+      <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
         <PhotoCard />
       </ScrollView>
     );
