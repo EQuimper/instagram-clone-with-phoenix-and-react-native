@@ -45,11 +45,11 @@ class PhotoCard extends Component {
         <Image
           style={styles.img}
           source={{
-            uri: 'https://www.what-dog.net/Images/faces2/scroll001.jpg',
+            uri: this.props.data.imageUrl,
           }}
         />
         <ActionBtns />
-        <Meta />
+        <Meta caption={this.props.data.caption} />
         <View style={styles.commentsWrapper}>
           <Touchable feedback="opacity">
             <Text style={styles.commentViewAll}>View all 13 comments</Text>
