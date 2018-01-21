@@ -1,0 +1,34 @@
+{
+  "name": "instagramclone",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@appandflow/touchable": "^1.2.2",
+    "apollo-cache-inmemory": "^1.1.5",
+    "apollo-client": "^2.2.0",
+    "apollo-link-http": "^1.3.2",
+    "graphql": "^0.12.3",
+    "graphql-tag": "^2.6.1",
+    "react": "16.2.0",
+    "react-apollo": "^2.0.4",
+    "react-native": "0.52.0",
+    "react-native-navigation": "https://github.com/EQuimper/react-native-navigation",
+    "react-native-typography": "^1.2.1",
+    "react-native-vector-icons": "^4.5.0"
+  },
+  "devDependencies": {
+    "babel-jest": "22.1.0",
+    "babel-preset-react-native": "4.0.0",
+    "eslint": "^4.15.0",
+    "eslint-config-equimper": "^2.2.1",
+    "jest": "22.1.2",
+    "react-test-renderer": "16.2.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
