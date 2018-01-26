@@ -10,7 +10,6 @@ defmodule InstagramWeb.Oauth.Facebook do
 
   defp get_user(token) do
     {:ok, user} = Facebook.me([fields: @fields], token)
-    IO.inspect [user: user]
     user
   end
 
