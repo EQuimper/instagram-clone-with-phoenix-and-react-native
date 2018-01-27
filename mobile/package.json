@@ -21,6 +21,7 @@
     "react": "16.2.0",
     "react-apollo": "^2.0.4",
     "react-native": "0.52.0",
+    "react-native-fbsdk": "^0.7.0",
     "react-native-linear-gradient": "^2.4.0",
     "react-native-navigation": "https://github.com/EQuimper/react-native-navigation",
     "react-native-typography": "^1.2.1",
