@@ -6,6 +6,11 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
   },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts"
+    ]
+  },
   "dependencies": {
     "@appandflow/touchable": "^1.2.2",
     "apollo-cache-inmemory": "^1.1.5",
@@ -16,6 +21,7 @@
     "react": "16.2.0",
     "react-apollo": "^2.0.4",
     "react-native": "0.52.0",
+    "react-native-linear-gradient": "^2.4.0",
     "react-native-navigation": "https://github.com/EQuimper/react-native-navigation",
     "react-native-typography": "^1.2.1",
     "react-native-vector-icons": "^4.5.0"

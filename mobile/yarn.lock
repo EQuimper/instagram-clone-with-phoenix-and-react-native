@@ -4180,6 +4180,12 @@ react-devtools-core@3.0.0:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
+react-native-linear-gradient@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.4.0.tgz#51d8ea12bb72a59bede9edc87b694b16b64cf435"
+  dependencies:
+    prop-types "^15.5.10"
+
 "react-native-navigation@https://github.com/EQuimper/react-native-navigation":
   version "1.1.314"
   resolved "https://github.com/EQuimper/react-native-navigation#fbb1a7e6ea5881ed0d6aa5760185b2533a5758bd"
