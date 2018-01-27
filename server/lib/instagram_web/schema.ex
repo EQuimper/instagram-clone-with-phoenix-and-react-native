@@ -10,7 +10,7 @@ defmodule InstagramWeb.Schema do
   query do
     @desc "Get list of photo"
     field :photos, list_of(:photo) do
-      middleware Middleware.Authorize
+      # middleware Middleware.Authorize
       resolve &Resolvers.Posts.photos/3
     end
 
