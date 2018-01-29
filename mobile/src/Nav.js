@@ -1,31 +1,41 @@
 import { Navigation } from 'react-native-navigation';
 
 import { registerScreens } from './screens';
-import { iconsLoaded, iconsMap } from './utils/themes';
+import { iconsMap } from './utils/themes';
+import appInitialized from './utils/appInitialized';
 
 registerScreens();
 
-export default class Nav {
-  constructor() {
-    iconsLoaded.then(() => this._initApp());
-  }
+export function startLogin() {
+  Navigation.startSingleScreenApp({
+    screen: {
+      screen: 'instagramclone.LoginScreen',
+      navigatorStyle: {
+        navBarHidden: true,
+      },
+    },
+  });
+}
 
-  _initApp() {
-    Navigation.startTabBasedApp({
-      tabs: [
-        {
-          label: 'Feeds',
-          screen: 'instagramclone.FeedsScreen',
-          title: 'Instagram',
-          icon: iconsMap.home
-        },
-        {
-          label: 'Explore',
-          screen: 'instagramclone.ExploreScreen',
-          title: 'Explore',
-          icon: iconsMap['ios-search']
-        },
-      ],
-    });
-  }
+export function startMainApp() {
+  Navigation.startTabBasedApp({
+    tabs: [
+      {
+        label: 'Feeds',
+        screen: 'instagramclone.FeedsScreen',
+        title: 'Instagram',
+        icon: iconsMap.home,
+      },
+      {
+        label: 'Explore',
+        screen: 'instagramclone.ExploreScreen',
+        title: 'Explore',
+        icon: iconsMap['ios-search'],
+      },
+    ],
+  });
+}
+
+export function init() {
+  appInitialized();
 }

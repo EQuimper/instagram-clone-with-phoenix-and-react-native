@@ -3,6 +3,7 @@ defmodule InstagramWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug InstagramWeb.Context
   end
 
   scope "/api" do

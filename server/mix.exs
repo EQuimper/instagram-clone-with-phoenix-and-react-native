@@ -42,7 +42,9 @@ defmodule Instagram.Mixfile do
       {:absinthe, "~> 1.4"},
       {:absinthe_plug, "~> 1.4"},
       {:absinthe_ecto, ">= 0.0.0"},
-      {:faker, "~> 0.9", only: [:dev, :test]}
+      {:faker, "~> 0.9", only: [:dev, :test]},
+      {:facebook, "~> 0.17.0"},
+      {:guardian, "~> 1.0"}
     ]
   end
 
