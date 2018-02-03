@@ -4,7 +4,7 @@ import {
   ActivityIndicator,
   StyleSheet,
   View,
-  RefreshControl
+  RefreshControl,
 } from 'react-native';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 
 class FeedsScreen extends Component {
   state = {
-    isRefreshing: false
+    isRefreshing: false,
   };
 
   _keyExtractor = item => item.id;
@@ -29,10 +29,10 @@ class FeedsScreen extends Component {
   _renderItem = ({ item }) => <PhotoCard data={item} />;
 
   _refreshRequest = async () => {
-    this.setState({ isRefreshing: true })
-    await this.props.data.refetch()
-    this.setState({ isRefreshing: false })
-  }
+    this.setState({ isRefreshing: true });
+    await this.props.data.refetch();
+    this.setState({ isRefreshing: false });
+  };
 
   render() {
     if (this.props.data.loading) {
