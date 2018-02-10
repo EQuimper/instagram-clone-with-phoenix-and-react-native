@@ -44,7 +44,12 @@ defmodule Instagram.Mixfile do
       {:absinthe_ecto, ">= 0.0.0"},
       {:faker, "~> 0.9", only: [:dev, :test]},
       {:facebook, "~> 0.17.0"},
-      {:guardian, "~> 1.0"}
+      {:guardian, "~> 1.0"},
+      {:ex_aws, "~> 2.0"},
+      {:ex_aws_s3, "~> 2.0"},
+      {:hackney, "~> 1.9"},
+      {:sweet_xml, "~> 0.6"},
+      { :uuid, "~> 1.1" }
     ]
   end
 

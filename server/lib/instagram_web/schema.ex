@@ -19,6 +19,12 @@ defmodule InstagramWeb.Schema do
       arg :id, non_null(:id)
       resolve &Resolvers.Posts.photo/3
     end
+
+    @desc "Get a presign url for upload an photo"
+    field :presign_url, :presign_url do
+      middleware Middleware.Authorize
+      resolve &Resolvers.Posts.presign_url/3
+    end
   end
 
   mutation do
