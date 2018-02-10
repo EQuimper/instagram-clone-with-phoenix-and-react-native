@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   fakeView: {
-    flex: 1.6,
+    flex: 1.4,
   },
   bookmarkWrapper: {
     flex: 0.3,
@@ -35,26 +35,35 @@ const styles = StyleSheet.create({
 
 class ActionBtns extends Component {
   state = {};
+
+  _getLikeIcon = () => {
+    if (this.props.viewerLike) {
+      return <Ionicons name="ios-heart" size={30} />;
+    }
+
+    return <Ionicons name="ios-heart-outline" size={30} />;
+  };
   render() {
     return (
       <View style={styles.root}>
         <View style={styles.actionsWrapper}>
           <Touchable
-            hitSlop={makeHitSlop(20)}
+            onPress={this.props.onLikedPress}
+            hitSlop={makeHitSlop(10)}
             feedback="opacity"
             style={styles.actionBtn}
           >
-            <Ionicons name="ios-heart-outline" size={30} />
+            {this._getLikeIcon()}
           </Touchable>
           <Touchable
-            hitSlop={makeHitSlop(20)}
+            hitSlop={makeHitSlop(10)}
             feedback="opacity"
             style={styles.actionBtn}
           >
             <EvilIcons name="comment" size={35} />
           </Touchable>
           <Touchable
-            hitSlop={makeHitSlop(20)}
+            hitSlop={makeHitSlop(10)}
             feedback="opacity"
             style={styles.actionBtn}
           >

@@ -143,9 +143,9 @@ class LoginScreen extends Component {
   };
 
   _onLoginFbPress = async () => {
-    // this.setState({ loading: true });
+    this.setState({ loading: true });
 
-    let res
+    let res;
     try {
       res = await LoginManager.logInWithReadPermissions([
         'public_profile',
@@ -157,16 +157,8 @@ class LoginScreen extends Component {
       console.log('====================================');
     }
 
-    console.log('====================================');
-    console.log('res', res);
-    console.log('====================================');
-
     if (res.grantedPermissions && !res.isCancelled) {
       const data = await AccessToken.getCurrentAccessToken();
-
-      console.log('====================================');
-      console.log('data', data);
-      console.log('====================================');
 
       if (data) {
         const serverResponse = await this.props.loginMutation({
@@ -181,7 +173,7 @@ class LoginScreen extends Component {
         try {
           await AsyncStorage.setItem(authToken, token);
 
-          // this.setState({ loading: false });
+          this.setState({ loading: false });
 
           startMainApp();
         } catch (error) {

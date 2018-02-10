@@ -28,5 +28,12 @@ defmodule InstagramWeb.Schema do
       arg :provider, type: :provider
       resolve &Resolvers.Accounts.login/3
     end
+
+    @desc "Like or Unlike a photo"
+    field :like_photo, :boolean do
+      arg :photo_id, non_null(:id)
+      middleware Middleware.Authorize
+      resolve &Resolvers.Reactions.like_photo/3
+    end
   end
 end

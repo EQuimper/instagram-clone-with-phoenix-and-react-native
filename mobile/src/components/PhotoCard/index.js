@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import Touchable from '@appandflow/touchable';
 import { human, iOSColors } from 'react-native-typography';
+import { graphql } from 'react-apollo';
 
 import Header from './Header';
 import ActionBtns from './ActionBtns';
 import Meta from './Meta';
 import CommentInput from '../CommentInput';
+import { likePhoto } from '../../graphql/mutations';
 
 const styles = StyleSheet.create({
   root: {
@@ -38,6 +40,28 @@ const styles = StyleSheet.create({
 
 class PhotoCard extends Component {
   state = {};
+
+  _onLikedPress = async () => {
+    console.log('====================================');
+    console.log('you like me', this.props);
+    console.log('====================================');
+
+    try {
+      const res = await this.props.likePhotoMutation({
+        variables: {
+          photoId: this.props.data.id,
+        },
+      });
+      console.log('====================================');
+      console.log('res', res);
+      console.log('====================================');
+    } catch (error) {
+      console.log('====================================');
+      console.log('error:', error);
+      console.log('====================================');
+    }
+  };
+
   render() {
     return (
       <View style={styles.root}>
@@ -48,7 +72,10 @@ class PhotoCard extends Component {
             uri: this.props.data.imageUrl,
           }}
         />
-        <ActionBtns />
+        <ActionBtns
+          viewerLike={this.props.data.viewerLike}
+          onLikedPress={this._onLikedPress}
+        />
         <Meta caption={this.props.data.caption} />
         <View style={styles.commentsWrapper}>
           <Touchable feedback="opacity">
@@ -64,4 +91,4 @@ class PhotoCard extends Component {
   }
 }
 
-export default PhotoCard;
+export default graphql(likePhoto, { name: 'likePhotoMutation' })(PhotoCard);
