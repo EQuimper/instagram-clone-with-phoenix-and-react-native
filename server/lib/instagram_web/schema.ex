@@ -35,6 +35,14 @@ defmodule InstagramWeb.Schema do
       resolve &Resolvers.Accounts.login/3
     end
 
+    @desc "Create a photo"
+    field :create_photo, :photo do
+      arg :image_url, :string
+      arg :caption, :string
+      middleware Middleware.Authorize
+      resolve &Resolvers.Posts.create_photo/3
+    end
+
     @desc "Like or Unlike a photo"
     field :like_photo, :boolean do
       arg :photo_id, non_null(:id)
