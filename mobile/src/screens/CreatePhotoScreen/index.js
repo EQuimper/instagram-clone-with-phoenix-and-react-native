@@ -45,18 +45,38 @@ const styles = StyleSheet.create({
 });
 
 class CreatePhotoScreen extends PureComponent {
-  state = {
-    images: [],
-    loading: false,
-    selected: null,
-    hasNextPage: false,
-    endCursor: '',
-    firstQuery: true,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      images: [],
+      loading: false,
+      selected: null,
+      hasNextPage: false,
+      endCursor: '',
+      firstQuery: true,
+    };
+
+    props.navigator.setOnNavigatorEvent(this._onNavigatorEvent.bind(this));
+  }
 
   componentDidMount() {
     this._getPhotos();
   }
+
+  _onNavigatorEvent = e => {
+    if (e.type === 'NavBarButtonPress') {
+      if (e.id === 'goToCaption') {
+        this.props.navigator.push({
+          screen: 'instagramclone.CaptionScreen',
+          title: 'New Post',
+          passProps: {
+            image: this.state.selected,
+          },
+        });
+      }
+    }
+  };
 
   _getPhotos = async after => {
     if (this.state.firstQuery) {
@@ -100,6 +120,15 @@ class CreatePhotoScreen extends PureComponent {
 
   _onSelect = selected => {
     this.setState({ selected });
+    this.props.navigator.setButtons({
+      rightButtons: [
+        {
+          id: 'goToCaption',
+          title: 'Next',
+        },
+      ],
+      animated: true,
+    });
   };
 
   _keyExtractor = item => item.node.image.filename;

@@ -1,3 +1,2 @@
-import PhotoCard from './PhotoCard';
-
-export { PhotoCard };
+export { default as PhotoCard } from './PhotoCard';
+export { default as Divider } from './Divider';
