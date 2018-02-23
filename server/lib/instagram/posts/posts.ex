@@ -9,7 +9,8 @@ defmodule Instagram.Posts do
   alias Instagram.Posts.Photo
 
   def list_photos do
-    Repo.all(Photo)
+    query = from p in Photo, order_by: [desc: :inserted_at]
+    Repo.all(query)
   end
 
   def get_photo!(id), do: Repo.get!(Photo, id)
