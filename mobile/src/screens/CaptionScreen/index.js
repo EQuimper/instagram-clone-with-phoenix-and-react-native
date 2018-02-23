@@ -9,9 +9,21 @@ import {
 } from 'react-native';
 import Touchable from '@appandflow/touchable';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import gql from 'graphql-tag';
+import { withApollo } from 'react-apollo';
 
 import { Divider } from '../../components';
 import { colors } from '../../utils/themes';
+import { uploadImageToS3 } from '../../utils/uploadImage';
+
+const signS3Query = gql`
+  query {
+    presignUrl {
+      url
+      uploadUrl
+    }
+  }
+`;
 
 const styles = StyleSheet.create({
   root: {
@@ -54,8 +66,45 @@ const styles = StyleSheet.create({
 });
 
 class CaptionScreen extends PureComponent {
-  state = {
-    caption: '',
+  constructor(props) {
+    super(props);
+    this.state = {
+      caption: '',
+    };
+
+    props.navigator.setOnNavigatorEvent(this._onNavigatorEvent.bind(this));
+  }
+
+  componentDidMount() {
+    this.props.navigator.setButtons({
+      rightButtons: [
+        {
+          id: 'sharePost',
+          title: 'Share',
+        },
+      ],
+      animated: true,
+    });
+  }
+
+  _onNavigatorEvent = e => {
+    if (e.type === 'NavBarButtonPress') {
+      if (e.id === 'sharePost') {
+        this._onSharePostPress();
+      }
+    }
+  };
+
+  _onSharePostPress = async () => {
+    const res = await this.props.client.query({ query: signS3Query });
+    const resultFromS3 = await uploadImageToS3(
+      this.props.image.node.image.uri,
+      res.data.presignUrl,
+    );
+
+    console.log('====================================');
+    console.log('resultFromS3', resultFromS3);
+    console.log('====================================');
   };
 
   _onCaptionChange = caption => this.setState({ caption });
@@ -102,4 +151,4 @@ class CaptionScreen extends PureComponent {
   }
 }
 
-export default CaptionScreen;
+export default withApollo(CaptionScreen);
