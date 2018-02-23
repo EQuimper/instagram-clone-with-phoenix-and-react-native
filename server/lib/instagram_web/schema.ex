@@ -19,6 +19,12 @@ defmodule InstagramWeb.Schema do
       arg :id, non_null(:id)
       resolve &Resolvers.Posts.photo/3
     end
+
+    @desc "Get a presign url for upload an photo"
+    field :presign_url, :presign_url do
+      middleware Middleware.Authorize
+      resolve &Resolvers.Posts.presign_url/3
+    end
   end
 
   mutation do
@@ -27,6 +33,14 @@ defmodule InstagramWeb.Schema do
       arg :token, :string
       arg :provider, type: :provider
       resolve &Resolvers.Accounts.login/3
+    end
+
+    @desc "Create a photo"
+    field :create_photo, :photo do
+      arg :image_url, :string
+      arg :caption, :string
+      middleware Middleware.Authorize
+      resolve &Resolvers.Posts.create_photo/3
     end
 
     @desc "Like or Unlike a photo"
