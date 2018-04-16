@@ -14,6 +14,7 @@ const getToken = async () => {
   }
 
   token = await AsyncStorage.getItem(authToken);
+
   return token;
 };
 
