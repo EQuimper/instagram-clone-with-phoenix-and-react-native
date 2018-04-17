@@ -66,7 +66,10 @@ class PhotoCard extends Component {
           <Touchable feedback="opacity">
             <Text style={styles.commentViewAll}>View all 13 comments</Text>
           </Touchable>
-          <CommentInput />
+          <CommentInput
+            photoId={this.props.data.id}
+            navigator={this.props.navigator}
+          />
         </View>
         <View style={styles.timeAgoWrapper}>
           <Text style={styles.timeAgo}>6 HOURS AGO</Text>
