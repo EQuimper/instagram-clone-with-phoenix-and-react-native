@@ -11,4 +11,9 @@ const makeHitSlop = size => ({
   bottom: size,
 });
 
-export { makeCircle, makeHitSlop };
+const centerElement = {
+  justifyContent: 'center',
+  alignItems: 'center',
+};
+
+export { makeCircle, makeHitSlop, centerElement };

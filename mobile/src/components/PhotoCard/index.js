@@ -47,6 +47,16 @@ class PhotoCard extends Component {
     this.props.onLikePhotoMutation();
   };
 
+  _goToComment = () => {
+    this.props.navigator.push({
+      screen: 'instagramclone.CommentsScreen',
+      title: 'Comments',
+      passProps: {
+        photoId: this.props.id,
+      },
+    });
+  };
+
   render() {
     return (
       <View style={styles.root}>
@@ -63,7 +73,7 @@ class PhotoCard extends Component {
         />
         <Meta caption={this.props.data.caption} />
         <View style={styles.commentsWrapper}>
-          <Touchable feedback="opacity">
+          <Touchable onPress={this._goToComment} feedback="opacity">
             <Text style={styles.commentViewAll}>View all 13 comments</Text>
           </Touchable>
           <CommentInput
