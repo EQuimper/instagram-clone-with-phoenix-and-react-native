@@ -54,7 +54,15 @@ class PhotoCard extends Component {
       passProps: {
         photoId: this.props.id,
       },
+      navigatorStyle: {
+        tabBarHidden: true,
+      },
     });
+
+    // this.props.navigator.toggleTabs({
+    //   to: 'hidden', // required, 'hidden' = hide tab bar, 'shown' = show tab bar
+    //   animated: true, // does the toggle have transition animation or does it happen immediately (optional)
+    // });
   };
 
   render() {
