@@ -8,14 +8,17 @@ import {
   TextInput,
   Image,
   KeyboardAvoidingView,
-  Alert,
+  Animated,
 } from 'react-native';
-import { Query } from 'react-apollo';
+import { Query, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
-import { Comment } from '../../components';
+import { Comment, ListSpacer } from '../../components';
 import { fakeAvatar } from '../../utils/constants';
 import { makeCircle, colors } from '../../utils/themes';
+import { createCommentMutation } from '../../graphql/mutations';
+
+const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
 const INPUT_HEIGHT = 60;
 
@@ -52,7 +55,9 @@ class CommentsScreen extends PureComponent {
   _handleChange = comment => this.setState({ comment });
 
   _onSubmit = () => {
-    Alert.alert('Your comment is', this.state.comment);
+    // Alert.alert('Your comment is', this.state.comment);
+
+    this.props.onCreateComment(this.state.comment);
 
     this.setState({
       comment: '',
@@ -80,11 +85,24 @@ class CommentsScreen extends PureComponent {
               );
             }
             return (
-              <FlatList
-                data={data.comments}
-                keyExtractor={this._keyExtractor}
-                renderItem={this._renderItem}
-              />
+              <ListSpacer>
+                {({ flatListHeight }) => (
+                  <KeyboardAvoidingView
+                    behavior="padding"
+                    keyboardVerticalOffset={INPUT_HEIGHT}
+                  >
+                    <AnimatedFlatList
+                      style={{ height: flatListHeight }}
+                      inverted
+                      data={data.comments}
+                      extraData={data.comments}
+                      keyExtractor={this._keyExtractor}
+                      renderItem={this._renderItem}
+                      contentContainerStyle={styles.contentList}
+                    />
+                  </KeyboardAvoidingView>
+                )}
+              </ListSpacer>
             );
           }}
         </Query>
@@ -119,6 +137,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  contentList: {
+    paddingTop: INPUT_HEIGHT * 2,
+  },
   inputSection: {
     height: INPUT_HEIGHT,
 
@@ -128,6 +149,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderTopWidth: StyleSheet.hairlineWidth,
     borderColor: colors.lightGray,
+    backgroundColor: '#fff',
   },
   avatar: {
     ...makeCircle(40),
@@ -151,4 +173,41 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CommentsScreen;
+export default graphql(createCommentMutation, {
+  props: ({ mutate, ownProps }) => ({
+    onCreateComment: text =>
+      mutate({
+        variables: {
+          text,
+          photoId: ownProps.photoId,
+        },
+        optimisticResponse: {
+          __typename: 'Mutation',
+          createComment: {
+            id: Math.round(Math.random() * -1000000),
+            __typename: 'Comment',
+            insertedAt: new Date(),
+            text,
+            user: {
+              __typename: 'User',
+              id: 'User:6',
+              username: 'EQuimper',
+              avatar: fakeAvatar,
+            },
+          },
+        },
+        update: (store, { data: { createComment } }) => {
+          const data = store.readQuery({
+            query: GET_COMMENTS,
+            variables: { photoId: ownProps.photoId },
+          });
+
+          store.writeQuery({
+            query: GET_COMMENTS,
+            variables: { photoId: ownProps.photoId },
+            data: { comments: [createComment, ...data.comments] },
+          });
+        },
+      }),
+  }),
+})(CommentsScreen);

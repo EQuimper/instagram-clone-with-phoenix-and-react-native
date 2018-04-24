@@ -17,7 +17,9 @@ const getToken = async () => {
   return token;
 };
 
-const cache = new InMemoryCache();
+const cache = new InMemoryCache({
+  addTypename: true,
+});
 
 const httpLink = createHttpLink({ uri: 'http://localhost:4000/api/graphql' });
 
