@@ -1,5 +1,6 @@
 defmodule InstagramWeb.UserSocket do
   use Phoenix.Socket
+  use Absinthe.Phoenix.Socket, schema: InstagramWeb.Schema
 
   ## Channels
   # channel "room:*", InstagramWeb.RoomChannel

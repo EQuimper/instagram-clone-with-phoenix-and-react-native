@@ -8,12 +8,9 @@ defmodule Instagram.Application do
 
     # Define workers and child supervisors to be supervised
     children = [
-      # Start the Ecto repository
       supervisor(Instagram.Repo, []),
-      # Start the endpoint when the application starts
       supervisor(InstagramWeb.Endpoint, []),
-      # Start your own worker by calling: Instagram.Worker.start_link(arg1, arg2, arg3)
-      # worker(Instagram.Worker, [arg1, arg2, arg3]),
+      supervisor(Absinthe.Subscription, [InstagramWeb.Endpoint])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

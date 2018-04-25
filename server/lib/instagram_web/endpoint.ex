@@ -1,6 +1,8 @@
 defmodule InstagramWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :instagram
 
+  use Absinthe.Phoenix.Endpoint
+
   socket "/socket", InstagramWeb.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
