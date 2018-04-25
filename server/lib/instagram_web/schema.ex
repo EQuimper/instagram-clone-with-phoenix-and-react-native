@@ -6,6 +6,7 @@ defmodule InstagramWeb.Schema do
 
   import_types __MODULE__.PostsTypes
   import_types __MODULE__.AccountsTypes
+  import_types __MODULE__.ChatsTypes
 
   query do
     @desc "Get list of photo"
@@ -31,6 +32,18 @@ defmodule InstagramWeb.Schema do
       arg :photo_id, non_null(:id)
       middleware Middleware.Authorize
       resolve &Resolvers.Posts.get_comments/3
+    end
+
+    field :channel, :channel do
+      arg :channel_id, non_null(:id)
+      middleware Middleware.Authorize
+      resolve &Resolvers.Chats.get_channel/3
+    end
+
+    field :user_channels, non_null(list_of(:channel)) do
+      arg :user_id, non_null(:id)
+      middleware Middleware.Authorize
+      resolve &Resolvers.Chats.get_user_channels/3
     end
   end
 
@@ -63,6 +76,21 @@ defmodule InstagramWeb.Schema do
       arg :text, non_null(:string)
       middleware Middleware.Authorize
       resolve &Resolvers.Posts.create_comment/3
+    end
+
+    field :create_channel, :channel do
+      arg :user_id, non_null(:id)
+
+      middleware Middleware.Authorize
+      resolve &Resolvers.Chats.create_channel/3
+    end
+
+    field :create_message, :message do
+      arg :text, non_null(:string)
+      arg :channel_id, non_null(:id)
+
+      middleware Middleware.Authorize
+      resolve &Resolvers.Chats.create_message/3
     end
   end
 end
