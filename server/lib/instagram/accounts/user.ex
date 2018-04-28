@@ -14,6 +14,7 @@ defmodule Instagram.Accounts.User do
 
     has_many :photos, Instagram.Posts.Photo
     has_many :like_photos, Instagram.Reactions.LikePhoto
+    has_many :comments, Instagram.Posts.Comment
 
     timestamps()
   end

@@ -41,6 +41,20 @@ const styles = StyleSheet.create({
 
 class CommentInput extends Component {
   state = {};
+
+  _goToComments = () => {
+    this.props.navigator.push({
+      screen: 'instagramclone.CommentsScreen',
+      title: 'Comments',
+      passProps: {
+        photoId: this.props.photoId,
+      },
+      navigatorStyle: {
+        tabBarHidden: true,
+      },
+    });
+  };
+
   render() {
     return (
       <View style={styles.root}>
@@ -51,6 +65,7 @@ class CommentInput extends Component {
           feedback="opacity"
           hitSlop={makeHitSlop(20)}
           style={styles.inputWrapper}
+          onPress={this._goToComments}
         >
           <View style={styles.input}>
             <Text style={styles.inputText}>Add a comment...</Text>
