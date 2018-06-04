@@ -46,6 +46,7 @@ defmodule InstagramWeb.Schema do
     field :create_photo, :photo do
       arg :image_url, :string
       arg :caption, :string
+      arg :tags, non_null(list_of(:string))
       middleware Middleware.Authorize
       resolve &Resolvers.Posts.create_photo/3
     end

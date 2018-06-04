@@ -23,6 +23,10 @@ defmodule InstagramWeb.Schema.PostsTypes do
     field :upload_url, non_null(:string)
   end
 
+  object :tag do
+    field :name, non_null(:string)
+  end
+
   object :comment do
     field :id, non_null(:id)
     field :text, non_null(:string)
