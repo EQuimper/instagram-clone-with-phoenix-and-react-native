@@ -32,6 +32,12 @@ defmodule InstagramWeb.Schema do
       middleware Middleware.Authorize
       resolve &Resolvers.Posts.get_comments/3
     end
+
+    @desc "Search a tag by his name"
+    field :search_tags, list_of(:tag) do
+      arg :name, non_null(:string)
+      resolve &Resolvers.Posts.search_tag/3
+    end
   end
 
   mutation do

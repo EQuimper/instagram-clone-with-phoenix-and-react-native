@@ -6,7 +6,7 @@ defmodule Instagram.Posts do
   import Ecto.Query, warn: false
   alias Instagram.Repo
 
-  alias Instagram.Posts.{Photo, Comment}
+  alias Instagram.Posts.{Photo, Comment, Tag}
 
   def list_photos do
     query = from p in Photo, order_by: [desc: :inserted_at]
@@ -81,5 +81,11 @@ defmodule Instagram.Posts do
   def get_comments_for_photo(photo_id) do
     query = from c in Comment, where: c.photo_id == ^photo_id, order_by: [desc: :inserted_at]
     Repo.all(query)
+  end
+
+  def search_tag(name) do
+    term = "%#{String.trim(name)}%"
+
+    Repo.all from t in Tag, where: ilike(t.name, ^term)
   end
 end

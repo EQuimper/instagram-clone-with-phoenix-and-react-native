@@ -30,4 +30,8 @@ defmodule InstagramWeb.Resolvers.Posts do
   def get_comments(_, %{photo_id: photo_id}, _) do
     {:ok, Posts.get_comments_for_photo(photo_id)}
   end
+
+  def search_tag(_, %{name: name}, _) do
+    {:ok, Posts.search_tag(name)}
+  end
 end
