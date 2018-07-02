@@ -88,4 +88,8 @@ defmodule Instagram.Posts do
 
     Repo.all from t in Tag, where: ilike(t.name, ^term)
   end
+
+  def get_tags() do
+    Repo.all(Tag)
+  end
 end

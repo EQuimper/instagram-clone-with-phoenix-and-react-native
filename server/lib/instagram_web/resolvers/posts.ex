@@ -34,4 +34,8 @@ defmodule InstagramWeb.Resolvers.Posts do
   def search_tag(_, %{name: name}, _) do
     {:ok, Posts.search_tag(name)}
   end
+
+  def get_tags(_, _, _) do
+    {:ok, Posts.get_tags()}
+  end
 end
