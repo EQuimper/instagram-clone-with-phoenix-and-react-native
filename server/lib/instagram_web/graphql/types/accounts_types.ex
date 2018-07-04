@@ -1,4 +1,4 @@
-defmodule InstagramWeb.Schema.AccountsTypes do
+defmodule InstagramWeb.GraphQL.Types.AccountsTypes do
   use Absinthe.Schema.Notation
 
   object :user do
