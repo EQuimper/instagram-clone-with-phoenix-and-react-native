@@ -131,6 +131,17 @@ class CaptionScreen extends PureComponent {
 
   _onCaptionChange = caption => this.setState({ caption });
 
+  _goToTag = () => {
+    this.props.navigator.push({
+      screen: 'instagramclone.TagScreen',
+      animated: true,
+      animationType: 'fade',
+    });
+    this.props.navigator.setStyle({
+      navBarHidden: true,
+    });
+  };
+
   render() {
     if (this.state.loading) {
       return (
@@ -165,7 +176,11 @@ class CaptionScreen extends PureComponent {
           </View>
         </View>
         <Divider />
-        <Touchable feedback="opacity" style={styles.listItem}>
+        <Touchable
+          onPress={this._goToTag}
+          feedback="opacity"
+          style={styles.listItem}
+        >
           <View>
             <Text>Tags</Text>
           </View>
